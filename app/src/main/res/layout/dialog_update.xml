@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="ExtraText">
+
+    <EditText
+        android:id="@+id/title_note"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:hint="@string/title_note"
+        android:layout_centerHorizontal="true"
+        android:importantForAutofill="no"
+        android:background="@color/addingNote"
+        android:textColorHint="@color/colorWhite"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        tools:ignore="RtlSymmetry"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/note_description"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:paddingStart="10dp"
+        android:hint="@string/note_description"
+        android:gravity="top"
+        android:importantForAutofill="no"
+        android:maxLines="5"
+        android:maxLength="2000"
+        android:inputType="textMultiLine|textCapSentences"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/addingNote"
+        android:textColorHint="@color/colorWhite"
+        android:layout_below="@+id/title_note"
+        tools:ignore="RtlSymmetry" />
+    <TextView
+        android:id="@+id/noteDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/note_date"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_below="@+id/note_priority"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/note_priority"
+        android:layout_below="@id/note_description"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/note_priority"
+        android:textSize="20sp"
+        />
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/note_priority"
+        android:layout_marginStart="20dp"
+        android:layout_below="@+id/note_description"
+        android:layout_marginTop="10dp"/>
+        android:layout_marginStart="170dp"/>
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_update"
+        android:text="@string/updatebtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/noteDueDate"/>
+
+</RelativeLayout>

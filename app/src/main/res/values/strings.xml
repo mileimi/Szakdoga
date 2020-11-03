@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Szakdoga</string>
+    <string name="facebook_application_id" translatable="false">617674105594444</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb617674105594444</string>
+    <string name="twitter_consumer_key" translatable="false">DHPcziBsHvgXRKjfZLWclkNWy</string>
+    <string name="twitter_consumer_secret" translatable="false">QVTUQ0kPNoUvJPB69O8WLghYyLDPdIHdQUIWcpFv2cOqL57dXD</string>
+    <string name="splash_your">Your</string>
+    <string name="splash_personal">Personal</string>
+    <string name="splash_assistant">Assistant</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="todo">reduce_alpha</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account_create_one">Don\'t have an account? Create one!</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in_btn">Sign In</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="forgot_password_text">To recover your password, you need to add your registered email address. We will send an email to you.</string>
+    <string name="send_btn">Send</string>
+    <string name="create_your_account">Create your Account!</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in_if_have_account">Already have an account? Sign in!</string>
+    <string name="layout_registration">Registration</string>
+    <string name="sign_in_todo">sign_in_welcome</string>
+    <string name="string_name">Name</string>
+    <string name="logout">Logout</string>
+    <string name="notes">Notes</string>
+    <string name="home_menu">Home</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_note">Title</string>
+    <string name="duedate">DueDate</string>
+    <string name="your_notes">Your Notes</string>
+    <string name="adding_new_notes">adding new notes</string>
+    <string name="note_description">Description</string>
+    <string name="note_date">Date</string>
+    <string name="note_priority">Priority:</string>
+    <string name="plus">+</string>
+    <string name="notecard">notecard</string>
+    <string name="edit_btn">edit button</string>
+    <string name="delete_btn">delete button</string>
+    <string name="updatebtn">Update</string>
+    <string name="welcome_text">Are you an organizer or a participant?</string>
+    <string name="organizer">Organizer</string>
+    <string name="participant">Participant</string>
+    <string name="imagebutton_todo">Welcome_button</string>
+    <string name="participant_welcome_text">Find the best programs and enjoy the events!</string>
+    <string name="sign_in">Sign in!</string>
+    <string name="sign_out">Sign out</string>
+    <string name="map">Map</string>
+    <string name="events">Events</string>
+
+</resources>

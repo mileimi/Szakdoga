@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "862977934430",
+    "firebase_url": "https://szakdoga-11e95.firebaseio.com",
+    "project_id": "szakdoga-11e95",
+    "storage_bucket": "szakdoga-11e95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862977934430:android:95a6acc7e22f6c1255e0cf",
+        "android_client_info": {
+          "package_name": "com.example.szakdoga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862977934430-g9lha50hgurm7mmlu0vfl0jbhrd0cbk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfgtBFY6f-4DuRWgfq6wZ54MQK9eeV0w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862977934430-g9lha50hgurm7mmlu0vfl0jbhrd0cbk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
