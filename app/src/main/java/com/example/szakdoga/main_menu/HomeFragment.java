@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
     private CollectionReference collectionReference;
     double d=1.2;
+    double d1=2.2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
