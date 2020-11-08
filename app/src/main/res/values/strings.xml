@@ -53,6 +53,6 @@
     <string name="events">Events</string>
     <string name="smartevents">SmartEvents</string>
     <string name="splash_image">splash image</string>
-    <string name="smartevents">SmartEvents</string>
+    <string name="smart_events">SmartEvents</string>
 
 </resources>

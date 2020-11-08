@@ -2,9 +2,7 @@ package com.example.szakdoga.signin_up;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -17,29 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.szakdoga.main_menu.Home;
-import com.example.szakdoga.main_menu.NavigationBar;
 import com.example.szakdoga.R;
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.example.szakdoga.main_menu.NavigationBar;
+import com.example.szakdoga.main_menu_to_participants.Navigation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
-import java.util.Arrays;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 /**
@@ -56,6 +42,8 @@ public class SignIn extends AppCompatActivity {
     private ProgressBar progressBar;
     private ImageView background;
     private FirebaseAuth fAuth;
+    private FirebaseFirestore fireStore;
+    private String UID;
 
    /* private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -71,7 +59,7 @@ public class SignIn extends AppCompatActivity {
 
         //Firebase elérése
         fAuth=FirebaseAuth.getInstance();
-
+        fireStore=FirebaseFirestore.getInstance();
         //Háttéranimáció beállítása
         Animation backgroundAnim = AnimationUtils.loadAnimation(this, R.anim.background_anim);
         background.setAnimation(backgroundAnim);
@@ -145,9 +133,30 @@ public class SignIn extends AppCompatActivity {
 
                             if(fAuth.getCurrentUser().isEmailVerified()){
                             Toast.makeText(SignIn.this,"Logged in successfully!",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignIn.this, NavigationBar.class));
+
+                            UID= fAuth.getCurrentUser().getUid();
+
+                             fireStore.collection("users").document(UID)
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()){
+                                                if (task.getResult().contains("organizer")){
+                                                    if (task.getResult().getBoolean("organizer")){
+                                                        startActivity(new Intent(SignIn.this, NavigationBar.class));
+                                                    }else{
+                                                        startActivity(new Intent(SignIn.this, Navigation.class));
+                                                    }
+                                                }else{
+                                                    startActivity(new Intent(SignIn.this, Navigation.class));
+                                                }
+                                                finish();
+
+                                            }
+                                        }
+                                    });
                             progressBar.setVisibility(View.GONE);
-                            finish();
                         }else{
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(SignIn.this,"Please verify your email.",Toast.LENGTH_SHORT).show();
