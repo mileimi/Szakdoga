@@ -51,5 +51,8 @@
     <string name="sign_out">Sign out</string>
     <string name="map">Map</string>
     <string name="events">Events</string>
+    <string name="smartevents">SmartEvents</string>
+    <string name="splash_image">splash image</string>
+    <string name="smartevents">SmartEvents</string>
 
 </resources>

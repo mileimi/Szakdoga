@@ -10,9 +10,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/smartevents"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".main_menu_participant.Navigation"></activity>
         <activity android:name=".signin_up.SignIn" />
         <activity android:name=".main_menu.NavigationBar" />
         <activity android:name=".main_menu.Home" />

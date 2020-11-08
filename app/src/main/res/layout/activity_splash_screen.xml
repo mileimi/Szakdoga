@@ -5,18 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A35454">
+    android:background="#322F2F">
 
     <ImageView
         android:id="@+id/imageView222"
-        android:layout_width="169dp"
-        android:layout_height="173dp"
+        android:layout_width="568dp"
+        android:layout_height="251dp"
         android:layout_marginTop="96dp"
-        android:src="@drawable/balloons"
+        android:src="@drawable/splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        android:contentDescription="@string/splash_image" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
+        android:text="@string/smartevents"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView222"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView222"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -26,6 +42,7 @@
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/participant_welcome_text"
+        android:textColor="@color/colorWhite"
         android:textSize="30sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView222"
-        app:layout_constraintVertical_bias="0.432"
+        app:layout_constraintVertical_bias="0.299"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
