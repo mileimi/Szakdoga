@@ -1,4 +1,4 @@
-package com.example.szakdoga.main_menu;
+package com.example.szakdoga.main_menu_to_organizer;
 /**
  * A főmenü aminek alján található egy navigációs sáv,
  * ennek segítségével válthatunk a fragment-ek között

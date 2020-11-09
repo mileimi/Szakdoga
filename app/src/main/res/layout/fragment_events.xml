@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main_menu_to_organizer.HomeFragment"
-    android:background="#34758E"
+    tools:context=".main_menu_to_participants.Navigation"
+    android:background="#0A85B5"
     android:orientation="vertical">
 
     <TextView
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/events"
@@ -18,7 +19,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="475dp"
-        android:id="@+id/recyclerViewForEvent" />
+        android:id="@+id/recyclerViewForEvent1"
+        tools:listitem="@layout/eventcard"/>
 
 
 </LinearLayout>

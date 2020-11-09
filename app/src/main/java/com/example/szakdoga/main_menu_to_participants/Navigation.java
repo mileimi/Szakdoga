@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.szakdoga.R;
-import com.example.szakdoga.main_menu.HomeFragment;
-import com.example.szakdoga.main_menu.MapFragment;
+import com.example.szakdoga.main_menu_to_organizer.HomeFragment;
+import com.example.szakdoga.main_menu_to_organizer.MapFragment;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class Navigation extends AppCompatActivity {
@@ -29,9 +29,9 @@ public class Navigation extends AppCompatActivity {
         if (savedInstanceState==null){
             bottomNav.setItemSelected(R.id.events,true);
             fragmentManager=getSupportFragmentManager();
-            HomeFragment homeFragment=new HomeFragment();
+            EventsFragment eventsFragment=new EventsFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container2,homeFragment)
+                    .replace(R.id.fragment_container2,eventsFragment)
                     .commit();
         }
         //Itt pedig válthatunk a fragment-ek között
@@ -41,10 +41,13 @@ public class Navigation extends AppCompatActivity {
                 Fragment fragment=null;
                 switch (id){
                     case R.id.events:
-                        fragment=new HomeFragment();
+                        fragment=new EventsFragment();
                         break;
                     case R.id.map2:
                         fragment=new MapFragment();
+                        break;
+                    case R.id.profile:
+                        fragment=new ProfileFragment();
                         break;
                 }
                 if (fragment!=null){

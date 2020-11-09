@@ -1,15 +1,23 @@
-package com.example.szakdoga.main_menu;
+package com.example.szakdoga.main_menu_to_organizer;
 
 import com.google.firebase.firestore.GeoPoint;
 
 public class EventModel {
+    private String ID;
     private String title;
     private String time;
     private GeoPoint geoPoint;
 
     private EventModel() {}
 
-    EventModel(String title,String time){
+    public EventModel(String title, String time){
+        this.title=title;
+        this.time=time;
+        this.geoPoint=null;
+    }
+
+    public EventModel(String ID,String title, String time){
+        this.ID=ID;
         this.title=title;
         this.time=time;
         this.geoPoint=null;
@@ -19,6 +27,14 @@ public class EventModel {
         this.title=title;
         this.time=time;
         this.geoPoint=geoPoint;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getTitle() {

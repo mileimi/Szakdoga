@@ -1,4 +1,4 @@
-package com.example.szakdoga.main_menu;
+package com.example.szakdoga.main_menu_to_organizer;
 /**
  * Ez a fragment a jegyzetek kezelését teszi lehetővé
  */

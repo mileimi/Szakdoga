@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.szakdoga.R;
-import com.example.szakdoga.main_menu.NavigationBar;
+import com.example.szakdoga.main_menu_to_organizer.NavigationBar;
 import com.example.szakdoga.main_menu_to_participants.Navigation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
