@@ -43,7 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:src="@android:drawable/star_off"
+        android:padding="5dp"
+        android:src="@drawable/heart"
         android:id="@+id/like_event"
         android:contentDescription="@string/notecard" />
 

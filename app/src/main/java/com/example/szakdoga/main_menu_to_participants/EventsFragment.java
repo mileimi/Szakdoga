@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,18 +34,22 @@ public class EventsFragment extends Fragment {
     ArrayList<EventModel> events;
     ArrayList<String> eventsID;
     private FirebaseFirestore db;
+    private FirebaseFirestore ref;
     private FirebaseAuth firebaseAuth;
     private String userID;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        db=FirebaseFirestore.getInstance();
-        firebaseAuth=FirebaseAuth.getInstance();
-        userID=firebaseAuth.getCurrentUser().getUid();
+        db = FirebaseFirestore.getInstance();
+        ref=FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        userID = firebaseAuth.getCurrentUser().getUid();
 
-        events=new ArrayList<>();
-        eventsID=new ArrayList<>();
+        events = new ArrayList<>();
+        eventsID = new ArrayList<>();
+
         db.collection("events")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -53,7 +58,7 @@ public class EventsFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("FIRESTOREdata", document.getId() + " => " + document.getData());
-                                events.add(new EventModel(document.getId().toString(),document.getString("Title"),document.getString("Time")));
+                                events.add(new EventModel(document.getId().toString(), document.getString("Title"), document.getString("Time")));
                                 eventAdapter.notifyDataSetChanged();
                             }
                         } else {
@@ -62,18 +67,18 @@ public class EventsFragment extends Fragment {
                     }
                 });
 
-        db.collection("users")
+        ref.collection("users").document(userID)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.getId().equals(userID)){
-                                eventsID=(ArrayList<String>) document.get("likes");
-                                Log.d("EVENTSid", document.get("likes").toString());
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            if (documentSnapshot.exists()) {
+                                eventsID = (ArrayList<String>) documentSnapshot.get("likes");
                                 eventAdapter.notifyDataSetChanged();
-                            }}
+                                Log.d("TAGEK", String.valueOf(eventsID.isEmpty()));
+                            }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -82,7 +87,6 @@ public class EventsFragment extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,6 +94,8 @@ public class EventsFragment extends Fragment {
         v=inflater.inflate(R.layout.fragment_events, container, false);
         recyclerView=v.findViewById(R.id.recyclerViewForEvent1);
 
+        Log.d("TAGAAK", String.valueOf(events.isEmpty()));
+        Log.d("TAGart", String.valueOf(eventsID.isEmpty()));
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         eventAdapter=new RecycleAdapter(v.getContext(),events,eventsID);

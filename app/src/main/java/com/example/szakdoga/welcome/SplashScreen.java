@@ -21,21 +21,16 @@ import com.example.szakdoga.signin_up.SignIn;
  * Az animációk a resource/anim mappában találhatóak.
  */
 public class SplashScreen extends AppCompatActivity {
-
-    private TextView text1;
-    private Animation anim1,anim2;
-    private ImageView image;
-    private int DELAY=3200;
-
-
-    /*onCreate metódusban megkeressük a textett, imageview-t,
-    * betöltjük az animációkat, és beállítjuk a megfelelő View-hoz
-    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
+
+        TextView text1;
+        Animation anim1,anim2;
+        ImageView image;
+        int DELAY=3200;
 
         text1=findViewById(R.id.text_view_splash);
         image=findViewById(R.id.imageView222);
