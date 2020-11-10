@@ -50,6 +50,7 @@ public class EventsFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("FIRESTOREdata", document.getId() + " => " + document.getData());
                                 events.add(new EventModel(document.getId().toString(), document.getString("Title"), document.getString("Time")));
+                                eventAdapter.notifyDataSetChanged();
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

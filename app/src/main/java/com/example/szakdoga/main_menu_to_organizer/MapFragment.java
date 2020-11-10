@@ -17,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.util.AsyncQueue;
 
 import java.util.ArrayList;
 
@@ -58,6 +60,7 @@ public class MapFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("FIRESTOREdata", document.getId() + " => " + document.getData());
                                 events.add(new EventModel(document.getString("Title"),document.getString("Time"),document.getGeoPoint("GeoPoint")));
+
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -72,9 +75,9 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         mView=inflater.inflate(R.layout.fragment_map, container, false);
         mapView=mView.findViewById(R.id.id_mapView);
-        if (mapView!=null){
             mapView.onCreate(null);
             mapView.onResume();
+            mapView.refreshDrawableState();
             mapView.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(GoogleMap googleMap) {
@@ -97,11 +100,11 @@ public class MapFragment extends Fragment {
                             return false;
                         }
                     });
+
                 }
             });
-        }
-        return mView;
-    }
+
+    return mView;}
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
