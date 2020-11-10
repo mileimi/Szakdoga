@@ -18,14 +18,12 @@ import java.util.ArrayList;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
         ArrayList<EventModel> events;
-        ArrayList<String> likedEvents;
         Context context;
 
 
-public RecycleAdapter(Context context,ArrayList<EventModel> events,ArrayList<String> likedEvents){
+public RecycleAdapter(Context context,ArrayList<EventModel> events){
         this.context=context;
         this.events=events;
-        this.likedEvents=likedEvents;
         }
 
 @NonNull
@@ -41,11 +39,6 @@ public void onBindViewHolder(@NonNull RecycleAdapter.ViewHolder holder, int posi
 
         holder.textView.setText(events.get(position).getTitle());
         holder.textViewTime.setText(events.get(position).getTime());
-        for (int j=0;j<likedEvents.size();j++){
-            if (events.get(position).getID().equals(likedEvents.get(j))){
-                holder.like.setVisibility(View.GONE);
-            }
-        }
 }
 
 @Override
@@ -57,12 +50,11 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     TextView textView;
     TextView textViewTime;
-    ImageView like;
+
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
         textView=itemView.findViewById(R.id.EventTitle);
         textViewTime=itemView.findViewById(R.id.EventTime);
-        like=itemView.findViewById(R.id.like_event);
     }
 }
 }

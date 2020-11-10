@@ -32,23 +32,14 @@ public class EventsFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecycleAdapter eventAdapter;
     ArrayList<EventModel> events;
-    ArrayList<String> eventsID;
     private FirebaseFirestore db;
-    private FirebaseFirestore ref;
-    private FirebaseAuth firebaseAuth;
-    private String userID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         db = FirebaseFirestore.getInstance();
-        ref=FirebaseFirestore.getInstance();
-        firebaseAuth = FirebaseAuth.getInstance();
-        userID = firebaseAuth.getCurrentUser().getUid();
-
         events = new ArrayList<>();
-        eventsID = new ArrayList<>();
 
         db.collection("events")
                 .get()
@@ -59,32 +50,12 @@ public class EventsFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("FIRESTOREdata", document.getId() + " => " + document.getData());
                                 events.add(new EventModel(document.getId().toString(), document.getString("Title"), document.getString("Time")));
-                                eventAdapter.notifyDataSetChanged();
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
-
-        ref.collection("users").document(userID)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot documentSnapshot = task.getResult();
-                            if (documentSnapshot.exists()) {
-                                eventsID = (ArrayList<String>) documentSnapshot.get("likes");
-                                eventAdapter.notifyDataSetChanged();
-                                Log.d("TAGEK", String.valueOf(eventsID.isEmpty()));
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
     }
 
     @Override
@@ -94,11 +65,9 @@ public class EventsFragment extends Fragment {
         v=inflater.inflate(R.layout.fragment_events, container, false);
         recyclerView=v.findViewById(R.id.recyclerViewForEvent1);
 
-        Log.d("TAGAAK", String.valueOf(events.isEmpty()));
-        Log.d("TAGart", String.valueOf(eventsID.isEmpty()));
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        eventAdapter=new RecycleAdapter(v.getContext(),events,eventsID);
+        eventAdapter=new RecycleAdapter(v.getContext(),events);
         recyclerView.setAdapter(eventAdapter);
         return v;
     }
