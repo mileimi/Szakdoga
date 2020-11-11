@@ -11,21 +11,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.szakdoga.R;
 import com.example.szakdoga.main_menu_to_organizer.EventModel;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
         ArrayList<EventModel> events;
         Context context;
+        private StorageReference mStorageRef;
 
 
 public RecycleAdapter(Context context,ArrayList<EventModel> events){
         this.context=context;
         this.events=events;
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         }
 
 @NonNull
@@ -41,8 +47,13 @@ public void onBindViewHolder(@NonNull RecycleAdapter.ViewHolder holder, final in
 
         holder.textView.setText(events.get(position).getTitle());
         holder.textViewTime.setText(events.get(position).getTime());
+        if (!events.get(position).getImagePath().isEmpty()) {
+            Glide.with(context)
+                    .load(events.get(position).getImagePath())
+                    .into(holder.image);
+        }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+    holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context,EventDetails.class);
@@ -63,12 +74,13 @@ public int getItemCount() {
 public class ViewHolder extends RecyclerView.ViewHolder {
     TextView textView;
     TextView textViewTime;
-    AdapterView.OnItemClickListener itemClickListener;
+    ImageView image;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
         textView=itemView.findViewById(R.id.EventTitle);
         textViewTime=itemView.findViewById(R.id.EventTime);
+        image=itemView.findViewById(R.id.background_image);
 
     }
 

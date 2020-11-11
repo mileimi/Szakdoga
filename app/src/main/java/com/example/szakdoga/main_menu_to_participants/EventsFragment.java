@@ -22,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -49,7 +50,12 @@ public class EventsFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("FIRESTOREdata", document.getId() + " => " + document.getData());
-                                events.add(new EventModel(document.getId().toString(), document.getString("Title"), document.getString("Time"),document.getGeoPoint("GeoPoint"),document.getString("Description")));
+                                events.add(new EventModel(document.getId(),
+                                        document.getString("Image"),
+                                        document.getString("Title"),
+                                        document.getString("Time"),
+                                        document.getGeoPoint("GeoPoint"),
+                                        document.getString("Description")));
                                 eventAdapter.notifyDataSetChanged();
                             }
                         } else {

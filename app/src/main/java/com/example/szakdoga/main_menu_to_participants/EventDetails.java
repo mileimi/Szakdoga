@@ -73,7 +73,7 @@ public class EventDetails extends AppCompatActivity {
 
                 mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title(actualEvent.getTitle()));
 
-                CameraPosition camera= CameraPosition.builder().target(new LatLng(latitude,longitude)).zoom(10).bearing(0).tilt(45).build();
+                CameraPosition camera= CameraPosition.builder().target(new LatLng(latitude,longitude)).zoom(14).bearing(0).tilt(45).build();
                 googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camera));
 
             }

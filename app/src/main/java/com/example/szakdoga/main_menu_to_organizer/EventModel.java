@@ -7,6 +7,7 @@ import com.google.firebase.firestore.GeoPoint;
 
 public class EventModel implements Parcelable {
     private String ID;
+    private String imagePath;
     private String title;
     private String time;
     private String description;
@@ -14,13 +15,7 @@ public class EventModel implements Parcelable {
 
     private EventModel() {}
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public EventModel(String title, String time){
         this.title=title;
@@ -28,8 +23,11 @@ public class EventModel implements Parcelable {
         this.geoPoint=null;
     }
 
-    public EventModel(String ID,String title, String time, GeoPoint geoPoint,String description){
+
+
+    public EventModel(String ID,String imagePath, String title, String time, GeoPoint geoPoint, String description){
         this.ID=ID;
+        this.imagePath=imagePath;
         this.title=title;
         this.time=time;
         this.geoPoint=geoPoint;
@@ -54,6 +52,7 @@ public class EventModel implements Parcelable {
         title = in.readString();
         time = in.readString();
         description=in.readString();
+        imagePath=in.readString();
     }
 
     public static final Creator<EventModel> CREATOR = new Creator<EventModel>() {
@@ -67,6 +66,23 @@ public class EventModel implements Parcelable {
             return new EventModel[size];
         }
     };
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     public String getID() {
         return ID;
@@ -111,5 +127,6 @@ public class EventModel implements Parcelable {
         dest.writeString(title);
         dest.writeString(time);
         dest.writeString(description);
+        dest.writeString(imagePath);
     }
 }

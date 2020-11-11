@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main_menu_to_participants.Navigation"
-    android:background="#2F7AAE"
+    android:background="#286EA5"
     android:orientation="vertical">
 
     <TextView
@@ -17,8 +17,9 @@
         android:layout_margin="5dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="475dp"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/recyclerViewForEvent1"
         tools:listitem="@layout/eventcard"/>
 

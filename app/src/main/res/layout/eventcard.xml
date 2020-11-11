@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:id="@+id/cardView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_width="320dp"
+    android:layout_height="180dp"
     app:cardCornerRadius="12dp"
+    android:layout_gravity="center_horizontal"
     android:layout_margin="5dp"
     android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/image_round"/>
 
 
     <TextView
@@ -18,7 +25,7 @@
         android:paddingHorizontal="5dp"
         android:layout_marginTop="5dp"
         android:text="@string/title_note"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:gravity="center"
         android:background="@drawable/recycler_title_style"
         android:textColor="@color/colorBlackImageV"
@@ -34,6 +41,7 @@
         android:gravity="center"
         android:text="Time"
         android:textSize="12sp"
+        android:textStyle="bold"
         android:textColor="@color/colorWhite"
         android:layout_gravity="bottom|right"
         android:background="@drawable/recycler_time_style"
