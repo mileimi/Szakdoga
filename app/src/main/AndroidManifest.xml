@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".main_menu_to_participants.Navigation"></activity>
+        <activity android:name=".main_menu_to_participants.EventDetails"></activity>
+        <activity android:name=".main_menu_to_participants.Navigation" />
         <activity android:name=".signin_up.SignIn" />
         <activity android:name=".main_menu_to_organizer.NavigationBar" />
         <activity android:name=".main_menu_to_organizer.Home" />

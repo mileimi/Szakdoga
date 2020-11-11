@@ -1,14 +1,26 @@
 package com.example.szakdoga.main_menu_to_organizer;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.firestore.GeoPoint;
 
-public class EventModel {
+public class EventModel implements Parcelable {
     private String ID;
     private String title;
     private String time;
+    private String description;
     private GeoPoint geoPoint;
 
     private EventModel() {}
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public EventModel(String title, String time){
         this.title=title;
@@ -16,11 +28,19 @@ public class EventModel {
         this.geoPoint=null;
     }
 
-    public EventModel(String ID,String title, String time){
+    public EventModel(String ID,String title, String time, GeoPoint geoPoint,String description){
+        this.ID=ID;
+        this.title=title;
+        this.time=time;
+        this.geoPoint=geoPoint;
+        this.description=description;
+    }
+    public EventModel(String ID,String title, String time, String description){
         this.ID=ID;
         this.title=title;
         this.time=time;
         this.geoPoint=null;
+        this.description=description;
     }
 
     EventModel(String title,String time,GeoPoint geoPoint){
@@ -28,6 +48,25 @@ public class EventModel {
         this.time=time;
         this.geoPoint=geoPoint;
     }
+
+    protected EventModel(Parcel in) {
+        ID = in.readString();
+        title = in.readString();
+        time = in.readString();
+        description=in.readString();
+    }
+
+    public static final Creator<EventModel> CREATOR = new Creator<EventModel>() {
+        @Override
+        public EventModel createFromParcel(Parcel in) {
+            return new EventModel(in);
+        }
+
+        @Override
+        public EventModel[] newArray(int size) {
+            return new EventModel[size];
+        }
+    };
 
     public String getID() {
         return ID;
@@ -59,5 +98,18 @@ public class EventModel {
 
     public void setGeoPoint(GeoPoint geoPoint) {
         this.geoPoint = geoPoint;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(ID);
+        dest.writeString(title);
+        dest.writeString(time);
+        dest.writeString(description);
     }
 }

@@ -1,10 +1,12 @@
 package com.example.szakdoga.main_menu_to_participants;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,11 +37,23 @@ public RecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, i
         }
 
 @Override
-public void onBindViewHolder(@NonNull RecycleAdapter.ViewHolder holder, int position) {
+public void onBindViewHolder(@NonNull RecycleAdapter.ViewHolder holder, final int position) {
 
         holder.textView.setText(events.get(position).getTitle());
         holder.textViewTime.setText(events.get(position).getTime());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context,EventDetails.class);
+                intent.putExtra("Event",events.get(position));
+                intent.putExtra("latitude",events.get(position).getGeoPoint().getLatitude());
+                intent.putExtra("longitude",events.get(position).getGeoPoint().getLongitude());
+                context.startActivity(intent);
+            }
+        });
 }
+
 
 @Override
 public int getItemCount() {
@@ -47,14 +61,16 @@ public int getItemCount() {
         }
 
 public class ViewHolder extends RecyclerView.ViewHolder {
-
     TextView textView;
     TextView textViewTime;
+    AdapterView.OnItemClickListener itemClickListener;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
         textView=itemView.findViewById(R.id.EventTitle);
         textViewTime=itemView.findViewById(R.id.EventTime);
+
     }
+
 }
 }
