@@ -17,6 +17,16 @@
         android:src="@drawable/image_round"/>
 
 
+    <ToggleButton
+        android:id="@+id/like_event"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        android:layout_gravity="bottom|left"
+        android:layout_margin="3dp"/>
+
     <TextView
         android:id="@+id/EventTitle"
         android:layout_width="wrap_content"
