@@ -30,18 +30,20 @@
     <TextView
         android:id="@+id/EventTitle"
         android:layout_width="wrap_content"
-        android:layout_gravity="top|center"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="5dp"
+        android:layout_gravity="top|center"
         android:layout_marginTop="5dp"
-        android:text="@string/title_note"
-        android:textSize="18sp"
-        android:gravity="center"
         android:background="@drawable/recycler_title_style"
+        android:gravity="center"
+        android:alpha="0.6"
+        android:paddingHorizontal="5dp"
+        android:text="@string/title_note"
         android:textColor="@color/colorBlackImageV"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

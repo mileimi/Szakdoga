@@ -91,7 +91,7 @@ public class MapFragment extends Fragment {
                         mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(events.get(i).getGeoPoint().getLatitude(),events.get(i).getGeoPoint().getLongitude())).title(events.get(i).getTitle()));
                     }
 
-                    CameraPosition camera= CameraPosition.builder().target(new LatLng(47.231111,19.050199)).zoom(10).bearing(0).tilt(45).build();
+                    CameraPosition camera= CameraPosition.builder().target(new LatLng(47.524698,19.044044)).zoom(10).bearing(0).tilt(45).build();
                     googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camera));
 
                     mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {

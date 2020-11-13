@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class EventDetails extends AppCompatActivity {
         title.setText(actualEvent.getTitle());
         date.setText(actualEvent.getTime());
         description.setText(actualEvent.getDescription());
+        description.setMovementMethod(new ScrollingMovementMethod());
 
         map.onCreate(null);
         map.onResume();

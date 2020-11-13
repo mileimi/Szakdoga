@@ -2,44 +2,28 @@ package com.example.szakdoga.main_menu_to_participants;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.szakdoga.R;
 import com.example.szakdoga.main_menu_to_organizer.EventModel;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import static android.content.ContentValues.TAG;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
         ArrayList<EventModel> events;
@@ -61,6 +45,7 @@ public RecycleAdapter(Context context,ArrayList<EventModel> events){
 public RecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext())
         .inflate(R.layout.eventcard,parent,false);
+
          return new ViewHolder(view);
         }
 
@@ -95,6 +80,7 @@ public void onBindViewHolder(@NonNull final RecycleAdapter.ViewHolder holder, fi
                     docRef.update("likes", FieldValue.arrayUnion(events.get(position).getID()));
                 }else{
                     docRef.update("likes",FieldValue.arrayRemove(events.get(position).getID()));
+
                 }
             }
         });

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main_menu_to_participants.EventDetails"
-    android:background="#286EA5">
+    android:background="#3A3A3A">
 
     <TextView
         android:id="@+id/event_title"
@@ -14,7 +14,7 @@
         android:layout_marginTop="4dp"
         android:text="Title"
         android:textColor="@color/colorWhite"
-        android:textSize="40sp"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,6 @@
         android:layout_marginTop="4dp"
         android:text="date"
         android:paddingHorizontal="5dp"
-        android:background="@drawable/backgound_event_details"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +42,8 @@
         android:background="@drawable/backgound_event_details"
         android:layout_margin="10dp"
         android:scrollbars="vertical"
-        android:text="Description"
         android:textColor="@color/colorWhite"
+        android:text="Description"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
