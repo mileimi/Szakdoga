@@ -52,6 +52,9 @@ public class NavigationBar extends AppCompatActivity {
                     case R.id.map:
                         fragment=new MapFragment();
                         break;
+                    case R.id.profile0:
+                        fragment=new OrganizerFragment();
+                        break;
                 }
                 if (fragment!=null){
                     fragmentManager=getSupportFragmentManager();

@@ -95,8 +95,8 @@ public void onBindViewHolder(@NonNull final RecycleAdapter.ViewHolder holder, fi
                 context.startActivity(intent);
             }
         });
-}
 
+}
 
 @Override
 public int getItemCount() {
@@ -118,4 +118,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
 }
+
 }
+

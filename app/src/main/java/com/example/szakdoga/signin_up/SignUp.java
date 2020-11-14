@@ -27,6 +27,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,6 +125,8 @@ public class SignUp extends AppCompatActivity {
                                     user.put("firstName",nameFirst);
                                     user.put("lastName",nameLast);
                                     user.put("email",email);
+                                    user.put("likes", Collections.emptyList());
+                                    user.put("organizer",false);
                                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {

@@ -36,6 +36,7 @@ public class ProfileFragment extends Fragment {
 
     Button logout;
     TextView userText;
+    TextView emailText;
     private FirebaseAuth fAuth;
     private FirebaseFirestore firestore;
     private ArrayList<String> arrList;
@@ -56,7 +57,9 @@ public class ProfileFragment extends Fragment {
         View v;
         v=inflater.inflate(R.layout.fragment_profile, container, false);
         recyclerView1=v.findViewById(R.id.recyclerViewForEvent11);
-
+        logout=v.findViewById(R.id.logoutbtn);
+        userText=v.findViewById(R.id.textViewUserName);
+        emailText=v.findViewById(R.id.user_email);
 
         fAuth=FirebaseAuth.getInstance();
         firestore=FirebaseFirestore.getInstance();
@@ -68,12 +71,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
-                    Log.d(TAG, "DocumentSnapshot data: " + documentSnapshot.getData());
-                    userText.setText("Welcome "+documentSnapshot.get("firstName")+"!");
                     arrList = (ArrayList) documentSnapshot.get("likes");
+                    userText.setText("Welcome "+documentSnapshot.getString("firstName")+"!");
+                    emailText.setText(documentSnapshot.getString("email"));
+
                 } else {
                     Log.d(TAG, "No such document");
                 }
+
             }
         });
 
@@ -106,8 +111,7 @@ public class ProfileFragment extends Fragment {
         adapter=new RecycleAdapter(v.getContext(),events);
         recyclerView1.setAdapter(adapter);
 
-        logout=v.findViewById(R.id.logoutbtn);
-        userText=v.findViewById(R.id.textViewUserName);
+
 
         //Kijelentkezés
         logout.setOnClickListener(new View.OnClickListener() {

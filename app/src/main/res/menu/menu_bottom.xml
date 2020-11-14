@@ -26,6 +26,12 @@
         app:cnb_backgroundColor="#ff785b"
         />
 
-
+    <item android:id="@+id/profile0"
+        android:icon="@drawable/user"
+        android:title="@string/profile"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"
+        app:cnb_backgroundColor="#ff785b"
+        />
 
 </menu>

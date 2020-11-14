@@ -13,17 +13,6 @@ public class EventModel implements Parcelable {
     private String description;
     private GeoPoint geoPoint;
 
-    private EventModel() {}
-
-
-
-    public EventModel(String title, String time){
-        this.title=title;
-        this.time=time;
-        this.geoPoint=null;
-    }
-
-
 
     public EventModel(String ID,String imagePath, String title, String time, GeoPoint geoPoint, String description){
         this.ID=ID;
@@ -31,13 +20,6 @@ public class EventModel implements Parcelable {
         this.title=title;
         this.time=time;
         this.geoPoint=geoPoint;
-        this.description=description;
-    }
-    public EventModel(String ID,String title, String time, String description){
-        this.ID=ID;
-        this.title=title;
-        this.time=time;
-        this.geoPoint=null;
         this.description=description;
     }
 

@@ -56,5 +56,7 @@
     <string name="smart_events">SmartEvents</string>
     <string name="profile">Profile</string>
     <string name="welcome_sy">Welcome sy</string>
+    <string name="organizer1">organizer</string>
+    <string name="give_somebody_organizer_privilege">Give somebody privilige to organize</string>
 
 </resources>

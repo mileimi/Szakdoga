@@ -47,7 +47,12 @@ public class HomeFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("FIRESTOREdata", document.getId() + " => " + document.getData());
-                                events.add(new EventModel(document.getString("Title"),document.getString("Time")));
+                                events.add(new EventModel(document.getId(),
+                                        document.getString("Image"),
+                                        document.getString("Title"),
+                                        document.getString("Time"),
+                                        document.getGeoPoint("GeoPoint"),
+                                        document.getString("Description")));
                                 eventAdapter.notifyDataSetChanged();
                             }
                         } else {

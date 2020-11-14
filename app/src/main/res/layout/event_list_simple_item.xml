@@ -1,38 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:id="@+id/cardView1"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_width="320dp"
+    android:layout_height="180dp"
     app:cardCornerRadius="12dp"
+    android:layout_gravity="center_horizontal"
     android:layout_margin="5dp"
     android:padding="10dp">
 
+    <ImageView
+        android:id="@+id/background_image1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/image_round"/>
+    <ImageView
+        android:id="@+id/delete_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_delete_24"
+        android:padding="5dp"/>
+    <ImageView
+        android:id="@+id/edit_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:padding="5dp"
+        android:layout_gravity="right"/>
 
     <TextView
-        android:id="@+id/EventTitle"
+        android:id="@+id/EventTitle1"
         android:layout_width="wrap_content"
-        android:layout_gravity="top|center"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="5dp"
+        android:layout_gravity="top|center"
         android:layout_marginTop="5dp"
-        android:text="@string/title_note"
-        android:textSize="14sp"
-        android:gravity="center"
         android:background="@drawable/recycler_title_style"
+        android:gravity="center"
+        android:alpha="0.6"
+        android:paddingHorizontal="5dp"
+        android:text="@string/title_note"
         android:textColor="@color/colorBlackImageV"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="5dp"
-        android:id="@+id/EventTime"
+        android:paddingHorizontal="15dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/EventTime1"
         android:gravity="center"
         android:text="Time"
         android:textSize="12sp"
+        android:textStyle="bold"
         android:textColor="@color/colorWhite"
         android:layout_gravity="bottom|right"
         android:background="@drawable/recycler_time_style"
