@@ -15,6 +15,11 @@ public class UserModel {
         this.organizer = organizer;
     }
 
+    public UserModel(String ID, String email) {
+        this.ID = ID;
+        this.email = email;
+    }
+
     public String getID() {
         return ID;
     }

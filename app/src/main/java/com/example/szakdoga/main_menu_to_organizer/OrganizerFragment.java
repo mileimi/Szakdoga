@@ -9,13 +9,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.szakdoga.R;
 import com.example.szakdoga.main_menu_to_participants.RecycleAdapter;
@@ -41,9 +44,11 @@ public class OrganizerFragment extends Fragment {
     EditText addEmail;
     Button logoutButton,activateButton,phoneBookButton,calculatorButton,emailsButton;
     RecyclerView recyclerView;
+    ImageView info;
     private FirebaseAuth fAuth;
     private FirebaseFirestore firestore;
     private ArrayList<UserModel> organizers;
+    private ArrayList<UserModel> users;
     private OrganizerAdapter adapter;
     public static final String CALCULATOR_PACKAGE ="com.android.calculator2";
     public static final String CALCULATOR_CLASS ="com.android.calculator2.Calculator";
@@ -68,7 +73,9 @@ public class OrganizerFragment extends Fragment {
         calculatorButton=v.findViewById(R.id.calculator);
         emailsButton=v.findViewById(R.id.myemails);
         recyclerView=v.findViewById(R.id.recyclerOrganizers);
+        info=v.findViewById(R.id.infoToast);
         organizers=new ArrayList<>();
+        users=new ArrayList<>();
 
         final DocumentReference docRef = firestore.collection("users").document(fAuth.getCurrentUser().getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -92,6 +99,7 @@ public class OrganizerFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                users.add(new UserModel(document.getId(),document.getString("email")));
                                 if (document.getBoolean("organizer")){
                                     organizers.add(new UserModel(document.getId(),
                                             document.getString("firstName"),
@@ -114,7 +122,25 @@ public class OrganizerFragment extends Fragment {
         activateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //email aktiválása
+                String email=addEmail.getText().toString().trim();
+                if (TextUtils.isEmpty(email)){
+                    addEmail.setError("Email is required.");
+                }
+                else {
+                    String ID=null;
+                    for (int i=0;i<users.size();i++){
+                        if (users.get(i).getEmail().equals(email))
+                            ID=users.get(i).getID();
+                    }
+                    if (ID==null)
+                    {
+                        addEmail.setError("There is no user with this email");
+                    }
+                    else {
+                        DocumentReference reference=firestore.collection("users").document(ID);
+                        reference.update("organizer",true);
+                    }
+                }
             }
         });
 
@@ -151,6 +177,13 @@ public class OrganizerFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_APP_EMAIL);
                 startActivity(intent);
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"You can give someone permission if he or she is registered.",Toast.LENGTH_SHORT).show();
             }
         });
 

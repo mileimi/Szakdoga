@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/nameOrganizer"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
@@ -23,9 +23,8 @@
 
         <TextView
             android:id="@+id/emailOrganizer"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="68dp"
             android:layout_marginTop="4dp"
             android:text="@string/email_hint"
             android:textSize="10sp"
@@ -38,7 +37,7 @@
             android:id="@+id/edit_organizer"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="68dp"
+
             android:src="@drawable/ic_baseline_edit_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/emailOrganizer"
