@@ -29,14 +29,14 @@
         android:id="@+id/logoutbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="@string/logout"
         android:background="@drawable/button_sign_in"
         android:padding="5dp"
         android:layout_gravity="center_horizontal"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Events you've liked"
+        android:text="@string/events_you_ve_liked"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
         android:padding="10dp"/>

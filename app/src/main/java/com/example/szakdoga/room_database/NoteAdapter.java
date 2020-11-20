@@ -142,7 +142,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 NoteModel d=noteModelList.get(holder.getAdapterPosition());
                 noteDatabase.noteDao().deleteNote(d);
                 int position=holder.getAdapterPosition();
-                noteModelList.remove(position);notifyItemRemoved(position);
+                noteModelList.remove(position);
+                notifyItemRemoved(position);
                 notifyItemRangeChanged(position,noteModelList.size());
             }
         });

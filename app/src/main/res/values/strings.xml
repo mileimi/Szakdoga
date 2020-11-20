@@ -58,5 +58,28 @@
     <string name="welcome_sy">Welcome sy</string>
     <string name="organizer1">organizer</string>
     <string name="give_somebody_organizer_privilege">Give somebody privilige to organize</string>
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="eventbackground">eventBackground</string>
+    <string name="imagemaplocation">imageMapLocation</string>
+    <string name="photosetting">photoSetting</string>
+    <string name="deleteeventbutton">deleteEventButton</string>
+    <string name="editeventbutton">editEventButton</string>
+    <string name="time">Time</string>
+    <string name="new_event">New event</string>
+    <string name="information">information</string>
+    <string name="activate">activate</string>
+    <string name="phone_book">Phone book</string>
+    <string name="calculator">Calculator</string>
+    <string name="emails">emails</string>
+    <string name="organizers">Organizers</string>
+    <string name="events_you_ve_liked">Events you\'ve liked</string>
+    <string name="name">Name</string>
+    <string name="editorganizer">editOrganizer</string>
+    <string name="revoke_permission">Revoke permission</string>
+    <string name="upload_a_picture_to_the_storage">Upload a picture to the storage</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="uploaded_pictures">Uploaded pictures</string>
 
 </resources>

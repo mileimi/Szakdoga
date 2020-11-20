@@ -10,24 +10,47 @@
     android:layout_margin="5dp"
     android:padding="10dp">
 
+
     <ImageView
         android:id="@+id/background_image1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/image_round"/>
+        android:src="@drawable/image_round"
+        android:contentDescription="@string/eventbackground" />
+
+    <ImageView
+        android:id="@+id/locationChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_location_on_24"
+        android:layout_gravity="bottom|start"
+        android:padding="5dp"
+        android:contentDescription="@string/imagemaplocation" />
+    <ImageView
+        android:id="@+id/photoChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_photo_camera_24"
+        android:layout_gravity="center_horizontal|bottom"
+        android:padding="5dp"
+        android:contentDescription="@string/photosetting" />
+
     <ImageView
         android:id="@+id/delete_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:src="@drawable/ic_baseline_delete_24"
-        android:padding="5dp"/>
+        android:contentDescription="@string/deleteeventbutton" />
+
     <ImageView
         android:id="@+id/edit_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_edit_24"
         android:padding="5dp"
-        android:layout_gravity="right"/>
+        android:layout_gravity="end"
+        android:contentDescription="@string/editeventbutton" />
 
     <TextView
         android:id="@+id/EventTitle1"
@@ -53,11 +76,11 @@
         android:layout_marginBottom="5dp"
         android:id="@+id/EventTime1"
         android:gravity="center"
-        android:text="Time"
+        android:text="@string/time"
         android:textSize="12sp"
         android:textStyle="bold"
         android:textColor="@color/colorWhite"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:background="@drawable/recycler_time_style"
 
         />

@@ -84,32 +84,35 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
+        android:contentDescription="@string/information"
         android:src="@drawable/ic_baseline_info_24"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.23"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/myemails" />
 
     <EditText
-            android:id="@+id/add_email"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/email_text"
-            android:hint="@string/email_hint"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:padding="5dp"
-            android:paddingStart="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:ignore="MissingConstraints" />
+        android:id="@+id/add_email"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/email_text"
+        android:hint="@string/email_hint"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:padding="5dp"
+        android:paddingStart="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="MissingConstraints,RtlSymmetry" />
 
     <Button
         android:id="@+id/activate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="activate"
+        android:text="@string/activate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_email" />
@@ -120,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:text="Phone book"
+        android:text="@string/phone_book"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoutorg" />
 
@@ -130,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
-        android:text="Calculator"
+        android:text="@string/calculator"
         app:layout_constraintStart_toEndOf="@+id/phone_book"
         app:layout_constraintTop_toBottomOf="@+id/logoutorg" />
 
@@ -140,7 +143,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
-        android:text="emails"
+        android:text="@string/emails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/calculator"
         app:layout_constraintTop_toBottomOf="@+id/logoutorg" />
 
@@ -149,7 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Organizers"
+        android:text="@string/organizers"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,13 +164,13 @@
         android:id="@+id/recyclerOrganizers"
         android:layout_width="340dp"
         android:layout_height="100dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/backgound_event_details"
         android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:listitem="@layout/organizer_card"/>
+        tools:listitem="@layout/organizer_card" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

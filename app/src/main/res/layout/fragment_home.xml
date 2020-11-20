@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".main_menu_to_organizer.HomeFragment"
     android:background="#34758E"
+    android:id="@+id/fragment_home"
     android:orientation="vertical">
 
     <TextView
@@ -19,6 +20,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recyclerViewForEvent" />
+
+    <Button
+        android:id="@+id/new_event_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button_sign_in"
+        android:paddingHorizontal="60dp"
+        android:text="@string/new_event"
+        android:textSize="18sp" />
 
 
 </LinearLayout>
