@@ -81,5 +81,7 @@
     <string name="gallery">Gallery</string>
     <string name="upload">Upload</string>
     <string name="uploaded_pictures">Uploaded pictures</string>
+    <string name="create_a_new_event">Create a new Event</string>
+    <string name="create">Create</string>
 
 </resources>

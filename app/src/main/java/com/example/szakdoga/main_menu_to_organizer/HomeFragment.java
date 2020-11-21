@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
         recyclerView=v.findViewById(R.id.recyclerViewForEvent);
         newEventBtn=v.findViewById(R.id.new_event_btn);
 
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         eventAdapter=new EventAdapter(getActivity(),events);
         recyclerView.setAdapter(eventAdapter);
@@ -91,7 +91,8 @@ public class HomeFragment extends Fragment {
         newEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Új event hozzáadása
+                Intent intent=new Intent(getContext(),NewEvent.class);
+                startActivity(intent);
             }
         });
         return v;
