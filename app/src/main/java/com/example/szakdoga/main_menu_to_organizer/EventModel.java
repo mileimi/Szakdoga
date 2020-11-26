@@ -1,71 +1,37 @@
 package com.example.szakdoga.main_menu_to_organizer;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.firebase.firestore.GeoPoint;
+/**
+ * Az esemény adatainak tárolására szolgál az alábbi model:
+ * Tartalmazza az esemény ID-t,hátterének elérési útját, címét, leírását, dátumát, koordinátáit
+ */
 
-public class EventModel implements Parcelable {
+public class EventModel {
     private String ID;
-    private String imagePath;
-    private String title;
-    private String time;
-    private String description;
-    private GeoPoint geoPoint;
+     String Image;
+     String Title;
+     String Time;
+     String Description;
+     GeoPoint GeoPoint;
 
-
-    public EventModel(String ID,String imagePath, String title, String time, GeoPoint geoPoint, String description){
-        this.ID=ID;
-        this.imagePath=imagePath;
-        this.title=title;
-        this.time=time;
-        this.geoPoint=geoPoint;
-        this.description=description;
+    public EventModel(String ID, String image, String title, String time, String description, com.google.firebase.firestore.GeoPoint geoPoint) {
+        this.ID = ID;
+        Image = image;
+        Title = title;
+        Time = time;
+        Description = description;
+        GeoPoint = geoPoint;
     }
 
-    EventModel(String title,String time,GeoPoint geoPoint){
-        this.title=title;
-        this.time=time;
-        this.geoPoint=geoPoint;
+    public EventModel() {
     }
 
-    protected EventModel(Parcel in) {
-        ID = in.readString();
-        title = in.readString();
-        time = in.readString();
-        description=in.readString();
-        imagePath=in.readString();
+    public EventModel(String title, com.google.firebase.firestore.GeoPoint geoPoint) {
+        Title = title;
+        GeoPoint = geoPoint;
     }
 
-    public static final Creator<EventModel> CREATOR = new Creator<EventModel>() {
-        @Override
-        public EventModel createFromParcel(Parcel in) {
-            return new EventModel(in);
-        }
-
-        @Override
-        public EventModel[] newArray(int size) {
-            return new EventModel[size];
-        }
-    };
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
+    //Getterek, setterek
     public String getID() {
         return ID;
     }
@@ -74,41 +40,43 @@ public class EventModel implements Parcelable {
         this.ID = ID;
     }
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Title = title;
     }
 
     public String getTime() {
-        return time;
+        return Time;
     }
 
     public void setTime(String time) {
-        this.time = time;
+        Time = time;
     }
 
-    public GeoPoint getGeoPoint() {
-        return geoPoint;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setGeoPoint(GeoPoint geoPoint) {
-        this.geoPoint = geoPoint;
+    public void setDescription(String description) {
+        Description = description;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public com.google.firebase.firestore.GeoPoint getGeoPoint() {
+        return GeoPoint;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(ID);
-        dest.writeString(title);
-        dest.writeString(time);
-        dest.writeString(description);
-        dest.writeString(imagePath);
+    public void setGeoPoint(com.google.firebase.firestore.GeoPoint geoPoint) {
+        GeoPoint = geoPoint;
     }
 }

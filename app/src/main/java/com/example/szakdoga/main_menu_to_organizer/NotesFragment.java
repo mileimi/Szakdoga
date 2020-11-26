@@ -1,8 +1,6 @@
 package com.example.szakdoga.main_menu_to_organizer;
-/**
- * Ez a fragment a jegyzetek kezelését teszi lehetővé
- */
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -34,7 +32,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+/**
+ * Ez a fragment a jegyzetek kezelését teszi lehetővé
+ */
 public class NotesFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -100,7 +100,7 @@ public class NotesFragment extends Fragment {
                         calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         calendar.set(Calendar.MINUTE,minute);
 
-                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy-MM-dd HH:MM");
+                        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy-MM-dd HH:mm");
 
                         dateText.setText(simpleDateFormat.format(calendar.getTime()));
                     }
@@ -130,9 +130,9 @@ public class NotesFragment extends Fragment {
 
         //Az új jegyzet készítése AlertDialog formájában jelenik meg
         AlertDialog.Builder builder=new AlertDialog.Builder(getContext())
-                .setTitle("Create a new Note")
+                .setTitle(getString(R.string.create_new_item))
                 .setView(view)
-                .setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.create), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String sTitle=titleN.getText().toString().trim();
@@ -148,7 +148,7 @@ public class NotesFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                     }
                 })
-                .setNegativeButton("Cancel",null)
+                .setNegativeButton(getString(R.string.cancel),null)
                 .setCancelable(false);
         // Az AlertDialog-on megjelenő dátum beállítására meghívódik a showPickerDialog metódus
         textDueDate.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +159,13 @@ public class NotesFragment extends Fragment {
         });
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        notesList.clear();
+        System.gc();
     }
 }
 

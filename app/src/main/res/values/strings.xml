@@ -83,5 +83,56 @@
     <string name="uploaded_pictures">Uploaded pictures</string>
     <string name="create_a_new_event">Create a new Event</string>
     <string name="create">Create</string>
+    <string name="back1">Back</string>
+    <string name="set">Set</string>
+    <string name="festivals">Festivals</string>
+    <string name="english">english</string>
+    <string name="choose_a_festival">Choose a festival</string>
+    <string name="editing">editing</string>
+    <string name="deletebutton">deleteButton</string>
+    <string name="place">Place</string>
+    <string name="from">From</string>
+    <string name="to">to</string>
+    <string name="To">To</string>
+    <string name="email_is_required">Email is required.</string>
+    <string name="password_is_required">Password is required.</string>
+    <string name="logged">Logged in successfully!</string>
+    <string name="email_verification">Please verify your email.</string>
+    <string name="errorLog">Error! Something is wrong!</string>
+    <string name="firsNameReq">First name is required.</string>
+    <string name="lastNameReq">Last name is required.</string>
+    <string name="password_must_be">Password must be >= 6 characters.</string>
+    <string name="two_pass_not_eq">Confirm password and password do not match</string>
+    <string name="verification_sent">Verification email has been sent.</string>
+    <string name="verification_not_sent">Verification email has not been sent.</string>
+    <string name="user_created">User created. Verify your email!</string>
+    <string name="reset_link">Reset link sent to your email.</string>
+    <string name="reset_link_not">Error! Reset link is NOT sent.</string>
+    <string name="festival_created">Festival is created</string>
+    <string name="festival_not_created">Festival is not created</string>
+    <string name="want_delete">Are you sure you want to delete this festival?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="festival_deleted">Festival is deleted</string>
+    <string name="festival_not_deleted">Festival is not deleted</string>
+    <string name="festival_updated">Festival is updated</string>
+    <string name="festival_not_updated">Festival is not updated</string>
+    <string name="event_created">New event is created</string>
+    <string name="event_not_created">New event is not created</string>
+    <string name="add_location">Add a location</string>
+    <string name="event_not_updated">Event is not updated</string>
+    <string name="event_updated">Event is updated</string>
+    <string name="date_not_updated">Date is not updated</string>
+    <string name="want_delete_event">Are you sure you want to delete this event?</string>
+    <string name="event_deleted">Event is not deleted</string>
+    <string name="photo_downloading">Something is wrong while downloading the pictures.</string>
+    <string name="viewpageritem">viewPagerItem</string>
+    <string name="create_new_item">Create a new Note</string>
+    <string name="Low">Low</string>
+    <string name="High">High</string>
+    <string name="no_user">There is no user with this email</string>
+    <string name="give_permission">You can give someone permission if he/she is registered.</string>
+    <string name="has_to_be_org">Someone has to be an organizer.</string>
+
 
 </resources>

@@ -1,23 +1,20 @@
 package com.example.szakdoga.room_database;
-/**
- * A jegyzet modell leírása,
- * entitás-az adatbázis sémáját adja meg
- */
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import java.io.Serializable;
+/**
+ * A jegyzet modell leírása,
+ * entitások létrehozása,ami az adatbázis sémáját adja meg
+ */
 
-//tábla név-minden entitás egy sor az adatbázisban
+//tábla név:minden entitás egy sor az adatbázisban
 @Entity(tableName = "notes")
 public class NoteModel {
 
     //oszlopok definiálása
     //automatikusan generáló egyedi id
-    @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
@@ -45,6 +42,7 @@ public class NoteModel {
         this.date=date;
         this.description=description;
     }
+
     //setterek és getterek a változókhoz
     public int getId() {
         return id;

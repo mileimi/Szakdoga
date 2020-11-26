@@ -49,6 +49,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/button_sign_in"
         android:text="@string/logout"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/organizer" />
@@ -73,9 +74,9 @@
         android:text="@string/give_somebody_organizer_privilege"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintHorizontal_bias="0.266"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/calculator" />
 
     <ImageView
@@ -119,33 +120,35 @@
 
     <Button
         android:id="@+id/phone_book"
-        android:layout_width="wrap_content"
+        android:layout_width="116dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:text="@string/phone_book"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/logoutorg" />
 
     <Button
         android:id="@+id/calculator"
-        android:layout_width="wrap_content"
+        android:layout_width="116dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
         android:text="@string/calculator"
-        app:layout_constraintStart_toEndOf="@+id/phone_book"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/logoutorg"
+        app:layout_constraintStart_toStartOf="@+id/logoutorg"
         app:layout_constraintTop_toBottomOf="@+id/logoutorg" />
 
     <Button
         android:id="@+id/myemails"
-        android:layout_width="112dp"
+        android:layout_width="116dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="3dp"
         android:layout_marginTop="12dp"
+        android:textSize="12sp"
         android:text="@string/emails"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/calculator"
         app:layout_constraintTop_toBottomOf="@+id/logoutorg" />
 

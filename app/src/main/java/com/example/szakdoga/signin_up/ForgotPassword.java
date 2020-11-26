@@ -22,7 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class ForgotPassword extends AppCompatActivity {
 
-    Button sendBtn;
+    //Változók
+    Button sendBtn,backBtn;
     EditText emailText;
     FirebaseAuth fAuth;
 
@@ -33,28 +34,38 @@ public class ForgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         sendBtn=findViewById(R.id.btnSend);
+        backBtn=findViewById(R.id.backBTN);
         emailText=findViewById(R.id.emailEditText12);
         fAuth=FirebaseAuth.getInstance();
 
-        // Ha a küldés gombra kattintunk
+        //Visszalépés
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        // Ha a küldés gombra kattintunk akkor a megadott email címre kapunk egy jelszó megváltoztató üzenetet
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email=emailText.getText().toString().trim();
+                //Megadott email ellenőrzése
                 if (TextUtils.isEmpty(email)) {
-                    emailText.setError("Email is required.");
+                    emailText.setError(getString(R.string.email_is_required));
                 }
                 else{
                 fAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(ForgotPassword.this,"Reset link sent to your email.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgotPassword.this,getString(R.string.reset_link),Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ForgotPassword.this,"Error! Reset link is NOT sent."+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgotPassword.this,getString(R.string.reset_link_not)+e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }}

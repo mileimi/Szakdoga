@@ -1,8 +1,5 @@
 package com.example.szakdoga.signin_up;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.szakdoga.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,12 +26,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Regisztrációs felület:
@@ -40,6 +38,7 @@ import java.util.Map;
  */
 public class SignUp extends AppCompatActivity {
 
+    //Változók
     private Button signUpBtn;
     private EditText nameFirstText,nameLastText,emailText,passwordText,confirmPasswordText;
     private TextView signInText;
@@ -80,45 +79,57 @@ public class SignUp extends AppCompatActivity {
                 final String confirmPassword=confirmPasswordText.getText().toString().trim();
 
                 // Ellenőrzés :
+                //Név
                 if (TextUtils.isEmpty(nameFirst)){
-                    nameFirstText.setError("First name is required.");
+                    nameFirstText.setError(getString(R.string.firsNameReq));
                     return;
                 }
+                //Név
                 if (TextUtils.isEmpty(nameLast)){
-                    nameLastText.setError("Last name is required.");
+                    nameLastText.setError(getString(R.string.lastNameReq));
                     return;
                 }
+                //Email
                 if (TextUtils.isEmpty(email)){
-                    emailText.setError("Email is required.");
+                    emailText.setError(getString(R.string.email_is_required));
                     return;
                 }
+                //Jelszó
                 if (TextUtils.isEmpty(password)){
-                    passwordText.setError("Password is required.");
+                    passwordText.setError(getString(R.string.password_is_required));
                     return;
                 }
+                //Jelszó újra
                 if (TextUtils.isEmpty(confirmPassword)){
-                    confirmPasswordText.setError("Password is required.");
+                    confirmPasswordText.setError(getString(R.string.password_is_required));
                     return;
                 }
+                //A jelszó 6-nál több karakterből kell álljon
                 if (password.length()<6){
-                    passwordText.setError("Password must be >= 6 characters.");
+                    passwordText.setError(getString(R.string.password_must_be));
                     return;
                 }
+                //Ha nem egyezik a 2 jelszó mező tartalma
                 if (!confirmPassword.equals(password)){
-                    confirmPasswordText.setError("Confirm password and password do not match");
+                    confirmPasswordText.setError(getString(R.string.two_pass_not_eq));
                 }
+                //Ha minden helyesen van kitöltve:
                 if (!TextUtils.isEmpty(nameFirst) & !TextUtils.isEmpty(nameLast) & !TextUtils.isEmpty(email) & !TextUtils.isEmpty(password) & !TextUtils.isEmpty(confirmPassword) &  password.length()>6 & confirmPassword.equals(password)){
                 progressBar.setVisibility(View.VISIBLE);
 
+                //Regisztráció
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             final FirebaseUser user=fAuth.getCurrentUser();
+                            //Email megerősítő küldése a felhasználónak
+                            assert user != null;
                             user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(SignUp.this,"Verification email has been sent.",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUp.this,getString(R.string.verification_sent),Toast.LENGTH_SHORT).show();
+                                    //Eltároljuk a felhasználó adatait a Firestore-ba
                                     userID=user.getUid();
                                     DocumentReference documentReference=fStore.collection("users").document(userID);
                                     Map<String,Object> user=new HashMap<>();
@@ -143,14 +154,15 @@ public class SignUp extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Log.d("TAG","onFailure: Email not sent"+e.getMessage());
+                                    Toast.makeText(SignUp.this,getString(R.string.verification_not_sent),Toast.LENGTH_SHORT).show();
                                 }
                             });
 
-                            Toast.makeText(SignUp.this,"User created. Verify your email!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this,getString(R.string.user_created),Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignUp.this, SignIn.class));
                         }
                         else{
-                            Toast.makeText(SignUp.this,"Error !"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this,getString(R.string.errorLog)+ Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }

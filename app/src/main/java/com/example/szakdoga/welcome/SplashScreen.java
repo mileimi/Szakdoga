@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.szakdoga.R;
 import com.example.szakdoga.signin_up.SignIn;
-
-
 /**
  * Nyitó képernyő ami 3,2 másodpercig látható.
  * Animált TextView-t és ImageView-t használ.
@@ -27,17 +25,21 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
 
+        //Változók
         TextView text1;
         Animation anim1,anim2;
         ImageView image;
         int DELAY=3200;
 
+        //Layout elemek hozzárendelése
         text1=findViewById(R.id.text_view_splash);
         image=findViewById(R.id.imageView222);
 
+        //Animációk betöltése
         anim1= AnimationUtils.loadAnimation(this,R.anim.welcome_image_anim);
         anim2=AnimationUtils.loadAnimation(this,R.anim.welcome_text_anim);
 
+        //Animáció hozzárendelés a kiválasztott elemekhez
         image.setAnimation(anim1);
         text1.setAnimation(anim2);
 
@@ -51,5 +53,11 @@ public class SplashScreen extends AppCompatActivity {
                 finish();
             }
             }, DELAY);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
     }
 }

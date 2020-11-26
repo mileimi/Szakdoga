@@ -18,8 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.szakdoga.R;
-import com.example.szakdoga.main_menu_to_organizer.NavigationBar;
-import com.example.szakdoga.main_menu_to_participants.Navigation;
+import com.example.szakdoga.main_menu_to_organizer.ChooseFestival;
+import com.example.szakdoga.main_menu_to_participants.Festivals;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 
 /**
  * Bejelentkező felület
@@ -36,6 +37,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
  */
 public class SignIn extends AppCompatActivity {
 
+    //Változók
     private Button signInBtn;
     private EditText emailText,passwordText;
     private TextView forgotPasswordText, createAccountText;
@@ -45,50 +47,22 @@ public class SignIn extends AppCompatActivity {
     private FirebaseFirestore fireStore;
     private String UID;
 
-   /* private CallbackManager callbackManager;
-    private LoginButton loginButton;
-    private static final String TAG="FacebookAuthentication";
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.sign_in_activity);
+
         //Vezérlők beállítása
         setType();
 
         //Firebase elérése
         fAuth=FirebaseAuth.getInstance();
         fireStore=FirebaseFirestore.getInstance();
+
         //Háttéranimáció beállítása
         Animation backgroundAnim = AnimationUtils.loadAnimation(this, R.anim.background_anim);
         background.setAnimation(backgroundAnim);
-
-
-        /*//Facebook
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-        loginButton=findViewById(R.id.login_button);
-        callbackManager=CallbackManager.Factory.create();
-        loginButton.setReadPermissions(Arrays.asList("email","public_profile"));
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG,"onSuccess"+loginResult);
-                handleFacebookToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d(TAG,"onCancel");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG,"onError"+error);
-            }
-        });
-*/
-
 
         //Elfelejtett jelszó
         forgotPasswordText.setOnClickListener(new View.OnClickListener() {
@@ -115,95 +89,62 @@ public class SignIn extends AppCompatActivity {
                 String email=emailText.getText().toString().trim();
                 String password=passwordText.getText().toString().trim();
 
+                //Ha az email mező üres
                 if (TextUtils.isEmpty(email)){
-                    emailText.setError("Email is required.");
+                    emailText.setError(getString(R.string.email_is_required));
                     return;
                 }
+                //Ha a jelszó mező üres
                 if (TextUtils.isEmpty(password)){
-                    passwordText.setError("Password is required.");
+                    passwordText.setError(getString(R.string.password_is_required));
                     return;
                 }
-
+                //Ha a megadott mezők ki vannak töltve
                 if (!TextUtils.isEmpty(email) & !TextUtils.isEmpty(password)){
-                    progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                //Bejelentkezés(ha pontos adatokat adott meg és megerősítette az email címét)
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-
-                            if(fAuth.getCurrentUser().isEmailVerified()){
-                            Toast.makeText(SignIn.this,"Logged in successfully!",Toast.LENGTH_SHORT).show();
-
+                            if(Objects.requireNonNull(fAuth.getCurrentUser()).isEmailVerified()){
+                            Toast.makeText(SignIn.this,getString(R.string.logged),Toast.LENGTH_SHORT).show();
                             UID= fAuth.getCurrentUser().getUid();
-
+                            //Azonosítjuk hogy a felhasználó egy szervező-e
                              fireStore.collection("users").document(UID)
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                             if (task.isSuccessful()){
-                                                if (task.getResult().contains("organizer")){
-                                                    if (task.getResult().getBoolean("organizer")){
-                                                        startActivity(new Intent(SignIn.this, NavigationBar.class));
+                                                if (Objects.requireNonNull(task.getResult()).contains("organizer")){
+                                                    if ( task.getResult().getBoolean("organizer")){
+                                                        startActivity(new Intent(SignIn.this, ChooseFestival.class));
                                                     }else{
-                                                        startActivity(new Intent(SignIn.this, Navigation.class));
+                                                        startActivity(new Intent(SignIn.this, Festivals.class));
                                                     }
                                                 }else{
-                                                    startActivity(new Intent(SignIn.this, Navigation.class));
+                                                    startActivity(new Intent(SignIn.this, Festivals.class));
                                                 }
                                                 finish();
-
                                             }
                                         }
                                     });
                             progressBar.setVisibility(View.GONE);
                         }else{
                                 progressBar.setVisibility(View.GONE);
-                                Toast.makeText(SignIn.this,"Please verify your email.",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignIn.this,getString(R.string.email_verification),Toast.LENGTH_SHORT).show();
                             }}
                         else{
-                            Toast.makeText(SignIn.this,"Error !"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this,getString(R.string.errorLog)+ Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
             }}
         });
-
-
     }
 
-  /* private void handleFacebookToken(AccessToken accessToken) {
-        Log.d(TAG,"handleFacebookToken"+accessToken);
-        AuthCredential credential= FacebookAuthProvider.getCredential(accessToken.getToken());
-        fAuth.signInWithCredential(credential).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Log.d(TAG,"sign in with credential: Successful");
-
-                }
-                else{
-                    Log.d(TAG,"sign in with credential: Failure",task.getException());
-                    Toast.makeText(SignIn.this,"Authentication Failed",Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
-    }
-
-    public void goMainScreen(){
-        Intent intent=new Intent(SignIn.this, Home.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    };
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        callbackManager.onActivityResult(requestCode,resultCode,data);
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-*/
     //Vezérlők beállítása
     private void setType() {
         emailText=findViewById(R.id.editTextTextEmailAddress);
@@ -211,7 +152,13 @@ public class SignIn extends AppCompatActivity {
         signInBtn = findViewById(R.id.btnSignIn);
         forgotPasswordText = findViewById(R.id.textForgotPass);
         createAccountText = findViewById(R.id.textCreateAcc);
-        background = findViewById(R.id.imageView);
         progressBar=findViewById(R.id.progressBar2);
+        background = findViewById(R.id.imageView);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
     }
 }

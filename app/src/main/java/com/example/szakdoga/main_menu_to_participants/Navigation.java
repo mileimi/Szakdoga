@@ -1,17 +1,19 @@
 package com.example.szakdoga.main_menu_to_participants;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.szakdoga.R;
-import com.example.szakdoga.main_menu_to_organizer.HomeFragment;
 import com.example.szakdoga.main_menu_to_organizer.MapFragment;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
-
+/**
+ * Navigációs activity a fragmentek között
+ */
 public class Navigation extends AppCompatActivity {
 
     ChipNavigationBar bottomNav;
@@ -21,48 +23,45 @@ public class Navigation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation2);
 
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        bottomNav = findViewById(R.id.bottom_nav2);
+        //Fesztivál ID
+        Intent intent=getIntent();
+        String festID=intent.getStringExtra("FestivalId");
 
+        bottomNav = findViewById(R.id.bottom_nav2);
+        fragmentManager = getSupportFragmentManager();
+
+        //Fragmentek
+        final EventsFragment home=new EventsFragment(festID);
+        final MapFragment map=new MapFragment(festID);
+        final ProfileFragment profile=new ProfileFragment(festID);
 
         //Ha belépünk az alkalmazásba akkor alapértelmezetten a Home fragment jelenik meg
-        if (savedInstanceState==null){
-            bottomNav.setItemSelected(R.id.events,true);
-            fragmentManager=getSupportFragmentManager();
-            EventsFragment eventsFragment=new EventsFragment();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container2,eventsFragment)
-                    .commit();
-        }
+        makeCurrentFragment(home);
+        bottomNav.setItemSelected(R.id.events, true);
+
         //Itt pedig válthatunk a fragment-ek között
         bottomNav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public void onItemSelected(int id) {
-                Fragment fragment=null;
-                switch (id){
+                switch (id) {
                     case R.id.events:
-                        fragment=new EventsFragment();
+                        makeCurrentFragment(home);
                         break;
                     case R.id.map2:
-                        fragment=new MapFragment();
+                        makeCurrentFragment(map);
                         break;
                     case R.id.profile:
-                        fragment=new ProfileFragment();
+                        makeCurrentFragment(profile);
                         break;
-                }
-                if (fragment!=null){
-                    fragmentManager=getSupportFragmentManager();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container2,fragment)
-                            .commit();
-                }
-                else{
-                    Log.e("TAG","ERROR in creating fragment");
                 }
             }
         });
-
-
-    };
-
+    }
+    //Váltás a fragmentek között
+    private void makeCurrentFragment(Fragment fragment) {
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container2, fragment)
+                .commit();
+    }
 }

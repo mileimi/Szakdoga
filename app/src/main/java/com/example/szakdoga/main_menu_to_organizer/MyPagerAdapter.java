@@ -1,5 +1,6 @@
 package com.example.szakdoga.main_menu_to_organizer;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,9 @@ import com.bumptech.glide.Glide;
 import com.example.szakdoga.R;
 
 import java.util.ArrayList;
-
+/**
+ * A ViewPager-hez tartozó adapter, ami megkapja a képek elérési útját egy listában
+ */
 public class MyPagerAdapter extends PagerAdapter {
     private android.content.Context context;
     private LayoutInflater layoutInflater;
@@ -24,7 +27,6 @@ public class MyPagerAdapter extends PagerAdapter {
        this.context = context;
        this.imagePaths = imagePaths;
     }
-
 
     @Override
     public int getCount() {
@@ -40,7 +42,7 @@ public class MyPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.image_item,null);
+        @SuppressLint("InflateParams") View view=layoutInflater.inflate(R.layout.image_item,null);
         ImageView imageView=view.findViewById(R.id.image_view_item);
         Glide.with(view)
                 .load(imagePaths.get(position))

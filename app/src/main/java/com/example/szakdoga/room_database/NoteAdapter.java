@@ -1,8 +1,4 @@
 package com.example.szakdoga.room_database;
-/**
- * A jegyzetek kártyákon (notecard) való megjlenítéséhez készült adapter,
- * amit a RecyclerView-hoz használunk
- */
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -30,6 +26,10 @@ import com.example.szakdoga.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+/**
+ * A jegyzetek kártyákon (notecard) való megjlenítéséhez készült adapter,
+ * amit a RecyclerView használ
+ */
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
@@ -38,6 +38,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private Activity context;
     private NoteDatabase noteDatabase;
 
+    //Adapter, ami megkapja a jegyzetek listát
     public NoteAdapter(Activity context,List<NoteModel> list){
         this.context=context;
         this.noteModelList=list;
@@ -52,7 +53,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
-
+    //Egy-egy jegyzet adatainak megjelenítése a NoteCard-on
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final NoteModel noteModel=noteModelList.get(position);
@@ -67,6 +68,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             holder.priority.setVisibility(View.VISIBLE);
         }
 
+        //A jegyzetre kattintva megjelenik Toast üzenetben annak leírása
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +76,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             }
         });
 
+        //A jegyzet szerkesztése
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +103,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 final Spinner priority=dialog.findViewById(R.id.spinner1);
                 final TextView date=dialog.findViewById(R.id.noteDueDate);
 
+                //Prioritás beállítása
                 final ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(v.getContext(),R.array.priorities, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 priority.setAdapter(adapter);
@@ -111,6 +115,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 priority.setSelection(sPriority);
                 date.setText(sDate);
 
+                //Dátum beállítása
                 date.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -118,6 +123,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                     }
                 });
 
+                //Jegyzet módosításának mentése
                 btnpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -136,6 +142,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             }
         });
 
+        //Jegyzet törlése
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,68 +1,48 @@
 package com.example.szakdoga.main_menu_to_participants;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.szakdoga.R;
 import com.example.szakdoga.main_menu_to_organizer.EventModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
+import com.firebase.ui.firestore.SnapshotParser;
+import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-
-import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
-
-
+import com.google.firebase.firestore.Query;
+/**
+ *  Az események megjelenítése RecyclerView használatával
+ */
 public class EventsFragment extends Fragment {
+
+    //Változók
     private RecyclerView recyclerView;
     private RecycleAdapter eventAdapter;
-    ArrayList<EventModel> events;
     private FirebaseFirestore db;
+    String festID;
+
+    public EventsFragment(String festID) {
+        this.festID = festID;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         db = FirebaseFirestore.getInstance();
-        events = new ArrayList<>();
+    }
 
-        db.collection("events")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("FIRESTOREdata", document.getId() + " => " + document.getData());
-                                events.add(new EventModel(document.getId(),
-                                        document.getString("Image"),
-                                        document.getString("Title"),
-                                        document.getString("Time"),
-                                        document.getGeoPoint("GeoPoint"),
-                                        document.getString("Description")));
-                                eventAdapter.notifyDataSetChanged();
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (eventAdapter!=null){ eventAdapter.notifyDataSetChanged();}
     }
 
     @Override
@@ -71,11 +51,33 @@ public class EventsFragment extends Fragment {
         View v;
         v=inflater.inflate(R.layout.fragment_events, container, false);
         recyclerView=v.findViewById(R.id.recyclerViewForEvent1);
+        //Fesztivál eseményeinek lekérdezése
+        Query query=db.collection("festivals").document(festID).collection("events");
 
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(layoutManager);
-        eventAdapter=new RecycleAdapter(v.getContext(),events);
+        PagedList.Config config=new PagedList.Config.Builder()
+                .setInitialLoadSizeHint(3)
+                .setPageSize(3)
+                .build();
+        FirestorePagingOptions<EventModel> options=new FirestorePagingOptions.Builder<EventModel>()
+                .setQuery(query, config, new SnapshotParser<EventModel>() {
+                    @NonNull
+                    @Override
+                    public EventModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        EventModel eventModel=snapshot.toObject(EventModel.class);
+                        String itemId=snapshot.getId();
+                        assert eventModel != null;
+                        eventModel.setID(itemId);
+                        return eventModel;
+                    }
+                })
+                .setLifecycleOwner(this)
+                .build();
+
+        //Adapter beállítások
+        eventAdapter=new RecycleAdapter(options,festID);
+        recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
         recyclerView.setAdapter(eventAdapter);
+
         return v;
     }
 

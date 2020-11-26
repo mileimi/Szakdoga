@@ -1,7 +1,5 @@
 package com.example.szakdoga.room_database;
-/**
- * Interfész, melyben a lekérdező metódusokat definiáltuk
- */
+
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -12,7 +10,9 @@ import androidx.room.Update;
 import java.util.List;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
-
+/**
+ * Interfész, melyben a lekérdező metódusokat definiáltam
+ */
 @Dao
 public interface NoteDao {
 

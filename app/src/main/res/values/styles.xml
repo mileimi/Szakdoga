@@ -15,7 +15,7 @@
     </style>
 
     <string-array name="priorities">
-        <item>Low</item>
-        <item>High</item>
+        <item>@string/Low</item>
+        <item>@string/High</item>
     </string-array>
 </resources>
