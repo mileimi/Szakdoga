@@ -122,11 +122,9 @@ public class EventPhotoSetting extends AppCompatActivity {
                                  Toast.makeText(EventPhotoSetting.this,getString(R.string.errorLog),Toast.LENGTH_SHORT).show();
                              }
                          });
-
                      }
                  });
              }
-
              @Override
              public void onPageScrollStateChanged(int state) {
 

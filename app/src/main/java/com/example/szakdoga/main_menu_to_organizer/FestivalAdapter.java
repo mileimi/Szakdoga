@@ -58,7 +58,7 @@ public class FestivalAdapter extends FirestorePagingAdapter<FestivalModel,Festiv
                 //Dialógust nyit meg
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(v.getContext());
                 builder1.setMessage(R.string.want_delete);
-                builder1.setCancelable(true);
+                builder1.setCancelable(false);
 
                 //Igen gomb-törli a kiválasztott fesztivált
                 builder1.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {

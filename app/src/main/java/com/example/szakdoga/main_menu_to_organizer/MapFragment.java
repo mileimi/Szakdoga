@@ -51,16 +51,18 @@ public class MapFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         MyAsyncTask myAsyncTask=new MyAsyncTask();
-         myAsyncTask.execute();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         mView = inflater.inflate(R.layout.fragment_map, container, false);
         mapView = mView.findViewById(R.id.id_mapView);
-        mapView.onCreate(null);
+        MyAsyncTask myAsyncTask=new MyAsyncTask();
+        myAsyncTask.execute();
+
+       /* mapView.onCreate(null);
         mapView.onResume();
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -76,16 +78,16 @@ public class MapFragment extends Fragment {
                 googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camera));
             }
         });
-
+*/
         return mView;
     }
 
 
-    public class MyAsyncTask extends AsyncTask{
+    public class MyAsyncTask extends AsyncTask<Void,Void,ArrayList<EventModel>>{
 
-        @Override
+      /*  @Override
         protected Object doInBackground(Object[] objects) {
-            db.collection("festivals").document(festID).collection("events")
+           db.collection("festivals").document(festID).collection("events")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -106,73 +108,43 @@ public class MapFragment extends Fragment {
         protected void onPostExecute(Object o) {
             mapView.invalidate();
         }
-
-/*
-    //Változók
-    GoogleMap mGoogleMap;
-    MapView mapView;
-    View mView;
-    ArrayList<EventModel> events;
-    private FirebaseFirestore db;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        db=FirebaseFirestore.getInstance();
-        events=new ArrayList<>();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //Események lekérése az adatbázisból
-                db.collection("events")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                        events.add(new EventModel(document.getString("Title"), document.getString("Time"), document.getGeoPoint("GeoPoint")));
-                                    }
-                                } else {
-                                    Log.d(TAG, "Error getting documents: ", task.getException());
+*/
+        @Override
+        protected ArrayList<EventModel> doInBackground(Void... voids) {
+            db.collection("festivals").document(festID).collection("events")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                                    events.add(new EventModel(document.getString("Title"), document.getGeoPoint("GeoPoint")));
                                 }
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
                             }
-                        });
-            }
-        }).start();
+                        }
+                    });
+            return events;
+        }
 
-    }
+        @Override
+        protected void onPostExecute(ArrayList<EventModel> eventModels) {
+            mapView.onCreate(null);
+            mapView.onResume();
+            mapView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
+                    mGoogleMap=googleMap;
+                    mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                    for(int i=0;i<events.size();i++)
+                    {
+                        mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(events.get(i).getGeoPoint().getLatitude(),events.get(i).getGeoPoint().getLongitude())).title(events.get(i).getTitle()));
+                    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView=inflater.inflate(R.layout.fragment_map, container, false);
-        mapView=mView.findViewById(R.id.id_mapView);
-        mapView.onCreate(null);
-        mapView.onResume();
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                mGoogleMap=googleMap;
-                mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                for(int i=0;i<events.size();i++)
-                {
-                    mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(events.get(i).getGeoPoint().getLatitude(),events.get(i).getGeoPoint().getLongitude())).title(events.get(i).getTitle()));
+                    CameraPosition camera= CameraPosition.builder().target(new LatLng(47.524698,19.044044)).zoom(10).bearing(0).tilt(45).build();
+                    googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camera));
                 }
-
-                Log.d("First","onMapReady"+events.toString());
-                CameraPosition camera= CameraPosition.builder().target(new LatLng(47.524698,19.044044)).zoom(10).bearing(0).tilt(45).build();
-                googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camera));
-            }
-        });
-        return mView;
-    }
-    @Override
-    public void onDestroy() {
-        events.clear();
-        mapView.onDestroy();
-        super.onDestroy();
-    }
-
- */
-}}
+            });
+        }
+    }}

@@ -31,6 +31,8 @@ public class EventModel {
         GeoPoint = geoPoint;
     }
 
+
+
     //Getterek, setterek
     public String getID() {
         return ID;
