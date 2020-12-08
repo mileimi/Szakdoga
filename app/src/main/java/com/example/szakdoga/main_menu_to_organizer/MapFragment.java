@@ -61,54 +61,12 @@ public class MapFragment extends Fragment {
         mapView = mView.findViewById(R.id.id_mapView);
         MyAsyncTask myAsyncTask=new MyAsyncTask();
         myAsyncTask.execute();
-
-       /* mapView.onCreate(null);
-        mapView.onResume();
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                mGoogleMap=googleMap;
-                mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                for(int i=0;i<events.size();i++)
-                {
-                    mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(events.get(i).getGeoPoint().getLatitude(),events.get(i).getGeoPoint().getLongitude())).title(events.get(i).getTitle()));
-                }
-
-                CameraPosition camera= CameraPosition.builder().target(new LatLng(47.524698,19.044044)).zoom(10).bearing(0).tilt(45).build();
-                googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camera));
-            }
-        });
-*/
         return mView;
     }
 
 
     public class MyAsyncTask extends AsyncTask<Void,Void,ArrayList<EventModel>>{
 
-      /*  @Override
-        protected Object doInBackground(Object[] objects) {
-           db.collection("festivals").document(festID).collection("events")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                    events.add(new EventModel(document.getString("Title"), document.getGeoPoint("GeoPoint")));
-                                }
-                            } else {
-                                Log.d(TAG, "Error getting documents: ", task.getException());
-                            }
-                        }
-                    });
-            return events;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            mapView.invalidate();
-        }
-*/
         @Override
         protected ArrayList<EventModel> doInBackground(Void... voids) {
             db.collection("festivals").document(festID).collection("events")
@@ -137,11 +95,11 @@ public class MapFragment extends Fragment {
                 public void onMapReady(GoogleMap googleMap) {
                     mGoogleMap=googleMap;
                     mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                    for(int i=0;i<events.size();i++)
-                    {
-                        mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(events.get(i).getGeoPoint().getLatitude(),events.get(i).getGeoPoint().getLongitude())).title(events.get(i).getTitle()));
+                    if(events!=null) {
+                        for (int i = 0; i < events.size(); i++) {
+                            mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(events.get(i).getGeoPoint().getLatitude(), events.get(i).getGeoPoint().getLongitude())).title(events.get(i).getTitle()));
+                        }
                     }
-
                     CameraPosition camera= CameraPosition.builder().target(new LatLng(47.524698,19.044044)).zoom(10).bearing(0).tilt(45).build();
                     googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camera));
                 }
