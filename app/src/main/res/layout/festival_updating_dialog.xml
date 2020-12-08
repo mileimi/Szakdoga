@@ -37,7 +37,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/festivalNameUpdate"
-        android:autofillHints="no" />
+        android:autofillHints="no"
+        android:inputType="text"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/textView123"

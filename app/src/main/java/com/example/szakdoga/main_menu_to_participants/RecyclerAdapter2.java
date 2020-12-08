@@ -1,7 +1,6 @@
 package com.example.szakdoga.main_menu_to_participants;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+/**
+ * Ez az adapter szolgál a kedvelt események megjelenítésére
+ * a profil fragment-ben
+ */
 class RecycleAdapter2 extends RecyclerView.Adapter<RecycleAdapter2.ViewHolder> {
     ArrayList<EventModel> events;
     Context context;
@@ -92,17 +95,6 @@ class RecycleAdapter2 extends RecyclerView.Adapter<RecycleAdapter2.ViewHolder> {
             }
         });
 
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context,EventDetails.class);
-                intent.putExtra("Event",events.get(position));
-                intent.putExtra("latitude",events.get(position).getGeoPoint().getLatitude());
-                intent.putExtra("longitude",events.get(position).getGeoPoint().getLongitude());
-                context.startActivity(intent);
-            }
-        });
-*/
     }
 
     @Override
@@ -124,5 +116,4 @@ class RecycleAdapter2 extends RecyclerView.Adapter<RecycleAdapter2.ViewHolder> {
             toggleButton=itemView.findViewById(R.id.like_event);
         }
 
-    }
-}
+    }}

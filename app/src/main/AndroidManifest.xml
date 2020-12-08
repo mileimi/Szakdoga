@@ -15,17 +15,26 @@
         android:supportsRtl="true"
         android:screenOrientation="portrait"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".main_menu_to_participants.Festivals" />
-        <activity android:name=".main_menu_to_organizer.ChooseFestival" />
-        <activity android:name=".main_menu_to_organizer.EventPhotoSetting" />
-        <activity android:name=".main_menu_to_participants.EventDetails" />
-        <activity android:name=".main_menu_to_participants.Navigation" />
+        <activity android:name=".main_menu_to_participants.Festivals"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".main_menu_to_organizer.ChooseFestival"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".main_menu_to_organizer.EventPhotoSetting"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".main_menu_to_participants.EventDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".main_menu_to_participants.Navigation"
+            android:screenOrientation="portrait"/>
         <activity android:name=".signin_up.SignIn"
             android:screenOrientation="portrait"/>
-        <activity android:name=".main_menu_to_organizer.NavigationBar" />
-        <activity android:name=".signin_up.SignUp" />
-        <activity android:name=".signin_up.ForgotPassword" />
-        <activity android:name=".welcome.SplashScreen">
+        <activity android:name=".main_menu_to_organizer.NavigationBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".signin_up.SignUp"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".signin_up.ForgotPassword"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".welcome.SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
