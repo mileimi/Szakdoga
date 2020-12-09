@@ -18,7 +18,7 @@ import com.firebase.ui.firestore.paging.LoadingState;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
- * RecyclerView adaptere
+ * RecyclerView adaptere, ami a fesztiválok megjelenítéséhez szükséges
  */
 public class SimpleFestivalAdapter extends FirestorePagingAdapter<FestivalModel,SimpleFestivalAdapter.Festival1ViewHolder> {
     private final FirebaseFirestore firestore;
